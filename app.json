@@ -1,0 +1,8 @@
+{
+  "name": "quizappShahsawartrading",
+  "displayName": "quizappShahsawartrading",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-8391410353522493~2393152365",
+    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+  }
+}
