@@ -33,36 +33,94 @@ const SecondYear = ({navigation}) => {
       option: 'Physics',
       navigate: 'course',
       path: require('../../assets/quizapp/physics.webp'),
+      chapter: [
+        {name: 'Electrostatics'},
+        {name: 'Electromagnetism'},
+        {name: 'AC circuit'},
+        {name: 'Electronics'},
+        {name: 'Atomic Spectra'},
+      ],
     },
     {
       option: 'Chemistry',
       navigate: 'course',
       path: require('../../assets/quizapp/chemistry.webp'),
+      chapter: [
+        {name: 's And p- Block Elements'},
+        {name: 'd and f - Block Elements'},
+        {name: 'Organic Compounds'},
+        {name: 'Hydrocarbons'},
+        {name: 'Alkyl Halides'},
+        {name: 'Alcohols, Phenols and Ethers'},
+        {name: 'Carbonyl Compounds I: Aldehydes and Keto'},
+        {name: 'Carbonyl Compounds 2: Carboxylic Acids a'},
+        {name: 'Biochemistry'},
+        {name: 'Industrial Chemistry'},
+        {name: 'Environmental Chemistry'},
+        {name: 'Analytical Chemistry'},
+      ],
     },
     {
       option: 'Biology',
       navigate: 'course',
       path: require('../../assets/quizapp/biology.webp'),
+      chapter: [
+        {name: 'Respiration'},
+        {name: 'Support And Movement'},
+        {name: 'Biotechnology'},
+        {name: 'Evolution'},
+        {name: 'Inheritance'},
+        {name: 'Reproduction'},
+        {name: 'Chemical Coordination'},
+      ],
     },
     {
       option: 'Computer',
       navigate: 'course',
       path: require('../../assets/quizapp/computer.webp'),
+      chapter: [
+        {name: 'Operating system'},
+        {name: 'System development life cycle'},
+        {name: 'Object oriented programming using C++'},
+        {name: 'Control structure'},
+        {name: 'Array and strings'},
+        {name: 'Functions'},
+        {name: 'Pointers'},
+        {name: 'Objects and classes'},
+        {name: 'File handling'},
+      ],
     },
     {
       option: 'English',
       navigate: 'course',
       path: require('../../assets/quizapp/english.webp'),
+      chapter: [
+        {name: 'Seerat-e-Tayyiba and the Muslim Youth'},
+        {name: 'Solitary Reaper (Poem)'},
+        {name: 'The Last Leaf'},
+        {name: 'Hubble'},
+        {name: 'The Toys (Poem)'},
+        {name: 'Jahanagir Khan the Conqueror'},
+        {name: 'Technical Education'},
+        {name: 'Once Upon a Time (Poem)'},
+        {name: `Desiree's Baby`},
+        {name: 'Lord of the Flies'},
+      ],
     },
     {
-      option: 'Maths',
-      navigate: 'course',
-      path: require('../../assets/quizapp/maths.webp'),
-    },
-    {
-      option: 'Arts',
+      option: 'Urdu',
       navigate: 'course',
       path: require('../../assets/quizapp/geography.webp'),
+      chapter: [
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+      ],
     },
   ];
   const [dataOption, setDataOption] = useState('');
@@ -152,12 +210,16 @@ const SecondYear = ({navigation}) => {
                   const subject = filterClass?.filter(
                     e => e?.class == item?.option,
                   );
+                  const chapters = item?.chapter;
                   return (
                     <View key={index}>
                       <TouchableOpacity
                         onPress={() => {
                           subject?.length > 0
-                            ? navigation.navigate('chapter', {subject})
+                            ? navigation.navigate('chapter', {
+                                subject,
+                                chapters,
+                              })
                             : ToastAndroid.show(
                                 `No ${item.option} MSQs found`,
                                 ToastAndroid.SHORT,

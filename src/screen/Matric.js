@@ -226,6 +226,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { MatricId } from '../utils/AdsUnits';
+import { GlobalStyle } from '../component/GlobalStyle';
 
 const Practise = () => {
   const [bg, setBg] = useState('white');
@@ -380,101 +381,105 @@ const Practise = () => {
     };
   });
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: bg,
-      }}>
-      <Animated.View
-        style={[
-          {
-            backgroundColor: '#969696',
-            borderRadius: 100,
-            position: 'absolute',
-            top: 260,
-            zIndex: 0,
-          },
-          bgAnimated,
-        ]}></Animated.View>
-      <View
-        style={{
-          position: 'absolute',
-          top: 250,
-          left: '45%',
-          backgroundColor: 'red',
-        }}>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#FFC0C0');
-          }}>
-          <Animated.View style={[animatedStyles8, styles.palette('#FFC0C0')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#E3B4FF');
-          }}>
-          <Animated.View style={[animatedStyles, styles.palette('#E3B4FF')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#BAB4FF');
-          }}>
-          <Animated.View style={[animatedStyles1, styles.palette('#BAB4FF')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#CCFFF0');
-          }}>
-          <Animated.View style={[animatedStyles2, styles.palette('#CCFFF0')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#D9FFCC');
-          }}>
-          <Animated.View style={[animatedStyles3, styles.palette('#D9FFCC')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#FBFFCC');
-          }}>
-          <Animated.View style={[animatedStyles4, styles.palette('#FBFFCC')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#FFEBCC');
-          }}>
-          <Animated.View style={[animatedStyles5, styles.palette('#FFEBCC')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#B4D7FF');
-          }}>
-          <Animated.View style={[animatedStyles6, styles.palette('#B4D7FF')]} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            handlePress('#F1D9D9');
-          }}>
-          <Animated.View style={[animatedStyles7, styles.palette('#F1D9D9')]} />
-        </TouchableOpacity>
-      </View>
-      {/* <View style={{alignItems:'center'}}>
-          <BannerAd
-            unitId={MatricId}
-            size={BannerAdSize.BANNER}
-          />
-        </View> */}
+    // <View
+    //   style={{
+    //     flex: 1,
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     backgroundColor: bg,
+    //   }}>
+    //   <Animated.View
+    //     style={[
+    //       {
+    //         backgroundColor: '#969696',
+    //         borderRadius: 100,
+    //         position: 'absolute',
+    //         top: 260,
+    //         zIndex: 0,
+    //       },
+    //       bgAnimated,
+    //     ]}></Animated.View>
+    //   <View
+    //     style={{
+    //       position: 'absolute',
+    //       top: 250,
+    //       left: '45%',
+    //       backgroundColor: 'red',
+    //     }}>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#FFC0C0');
+    //       }}>
+    //       <Animated.View style={[animatedStyles8, styles.palette('#FFC0C0')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#E3B4FF');
+    //       }}>
+    //       <Animated.View style={[animatedStyles, styles.palette('#E3B4FF')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#BAB4FF');
+    //       }}>
+    //       <Animated.View style={[animatedStyles1, styles.palette('#BAB4FF')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#CCFFF0');
+    //       }}>
+    //       <Animated.View style={[animatedStyles2, styles.palette('#CCFFF0')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#D9FFCC');
+    //       }}>
+    //       <Animated.View style={[animatedStyles3, styles.palette('#D9FFCC')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#FBFFCC');
+    //       }}>
+    //       <Animated.View style={[animatedStyles4, styles.palette('#FBFFCC')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#FFEBCC');
+    //       }}>
+    //       <Animated.View style={[animatedStyles5, styles.palette('#FFEBCC')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#B4D7FF');
+    //       }}>
+    //       <Animated.View style={[animatedStyles6, styles.palette('#B4D7FF')]} />
+    //     </TouchableOpacity>
+    //     <TouchableOpacity
+    //       activeOpacity={1}
+    //       onPress={() => {
+    //         handlePress('#F1D9D9');
+    //       }}>
+    //       <Animated.View style={[animatedStyles7, styles.palette('#F1D9D9')]} />
+    //     </TouchableOpacity>
+    //   </View>
+    //   {/* <View style={{alignItems:'center'}}>
+    //       <BannerAd
+    //         unitId={MatricId}
+    //         size={BannerAdSize.BANNER}
+    //       />
+    //     </View> */}
+    // </View>
+
+    <View style={GlobalStyle.flexCenter}>
+      <Text>Data will uploaded soon.....</Text>
     </View>
   );
 };

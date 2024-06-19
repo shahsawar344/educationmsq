@@ -1,4 +1,5 @@
-export const BaseUrl = 'https://quiz-app-ebon-nu.vercel.app';
+// export const BaseUrl = 'https://quiz-app-ebon-nu.vercel.app';
+export const BaseUrl = 'localhost:4000';
 
 export const getAllData = async () => {
   const requiredOption = {

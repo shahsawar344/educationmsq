@@ -34,43 +34,217 @@ const FirstYear = ({navigation}) => {
       option: 'Physics',
       navigate: 'course',
       path: require('../../assets/quizapp/physics.webp'),
+      chapter: [
+        {name: 'Measurement'},
+        {name: 'Vectors & Equilibrium'},
+        {name: 'Forces & Motion'},
+        {name: 'Work & Energy'},
+        {name: 'Rotational & Circular Motion'},
+        {name: 'Fluid Dynamics'},
+        {name: 'Oscillation'},
+        {name: 'Waves'},
+        {name: 'Physical Optics Notes'},
+        {name: 'Thermodynamics'},
+      ],
     },
     {
       option: 'Chemistry',
       navigate: 'course',
       path: require('../../assets/quizapp/chemistry.webp'),
+      chapter: [
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+      ],
     },
     {
       option: 'Biology',
       navigate: 'course',
       path: require('../../assets/quizapp/biology.webp'),
+      chapter: [
+        {name: 'Cell Structure And Function'},
+        {name: 'Biological Molecules'},
+        {name: 'Enzymes'},
+        {name: 'Bioenergetics'},
+        {name: 'Acellular Life'},
+        {name: 'Prokaryotes'},
+        {name: 'Protista And Fungi'},
+        {name: 'Diversity Among Plants'},
+        {name: 'Diversity Among Animals'},
+        {name: 'Form And Functions In Plants'},
+        {name: 'Digestion'},
+        {name: 'Circulation'},
+        {name: 'Immunity'},
+      ],
     },
     {
       option: 'Computer',
       navigate: 'course',
       path: require('../../assets/quizapp/computer.webp'),
+      chapter: [
+        {name: 'Overview of computer system'},
+        {name: 'Computer memory'},
+        {name: 'Centeral processing memory'},
+        {name: 'Inside system unit'},
+        {name: 'Network communication and protocol'},
+        {name: 'Wireless communication'},
+        {name: 'Database fundamentals'},
+        {name: 'Database development'},
+      ],
     },
     {
       option: 'English',
       navigate: 'course',
       path: require('../../assets/quizapp/english.webp'),
+      chapter: [
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+      ],
     },
-    {
-      option: 'Maths',
-      navigate: 'course',
-      path: require('../../assets/quizapp/maths.webp'),
-    },
+    // {
+    //   option: 'Maths',
+    //   navigate: 'course',
+    //   path: require('../../assets/quizapp/maths.webp'),
+    //   chapter: [
+    //     {name: ''},
+    //     {name: ''},
+    //     {name: ''},
+    //     {name: ''},
+    //     {name: ''},
+    //     {name: ''},
+    //     {name: ''},
+    //     {name: ''},
+    //   ],
+    // },
     {
       option: 'Arts',
       navigate: 'course',
       path: require('../../assets/quizapp/geography.webp'),
+      chapter: [
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+        {name: ''},
+      ],
     },
   ];
   const [dataOption, setDataOption] = useState('');
   // const filterClass = question?.filter(e => e?.type == 'First Year');
   // console.log(filterClass[0]);
   const [loading, setLoading] = useState(false);
-  const [filterClass, setFilterClass] = useState([]);
+  const [filterClass, setFilterClass] = useState([
+    {
+      _id: '666ebbf8c1700b0247113674',
+      question:
+        'Which property   states that the product of any number and 1 is the number itself?',
+      correctAnswer: 'Identity property of multiplication',
+      class: 'Physics',
+      chapter: 'Forces & Motion',
+      fieldsData: [
+        {
+          option: 'Commutative property of multiplication',
+        },
+        {
+          option: 'Associative property of multiplication',
+        },
+        {
+          option: 'Distributive property',
+        },
+        {
+          option: 'Identity property of multiplication',
+        },
+      ],
+      date: '01-05-2024',
+      __v: 0,
+    },
+    {
+      _id: '666ebbe4c1700b0247113670',
+      question:
+        'Which property  states that the product of any number and 1 is the number itself?',
+      correctAnswer: 'Identity property of multiplication',
+      class: 'Maths',
+      chapter: 'Measurement',
+      fieldsData: [
+        {
+          option: 'Commutative property of multiplication',
+        },
+        {
+          option: 'Associative property of multiplication',
+        },
+        {
+          option: 'Distributive property',
+        },
+        {
+          option: 'Identity property of multiplication',
+        },
+      ],
+      date: '01-05-2024',
+      __v: 0,
+    },
+    {
+      _id: '666ebbcfc1700b024711366d',
+      question:
+        'Which propert.  y states that the product of any number and 1 is the number itself?',
+      correctAnswer: 'Identity property of multiplication',
+      class: 'Maths',
+      chapter: 'Vectors & Equilibrium',
+      fieldsData: [
+        {
+          option: 'Commutative property of multiplication',
+        },
+        {
+          option: 'Associative property of multiplication',
+        },
+        {
+          option: 'Distributive property',
+        },
+        {
+          option: 'Identity property of multiplication',
+        },
+      ],
+      date: '01-05-2024',
+      __v: 0,
+    },
+    {
+      _id: '666eb6ed04cc214671a82d4c',
+      question:
+        'Which property states that the product of any number and 1 is the number itself?',
+      correctAnswer: 'Identity property of multiplication',
+      class: 'Maths',
+      chapter: 'Chapter 1',
+      fieldsData: [
+        {
+          option: 'Commutative property of multiplication',
+        },
+        {
+          option: 'Associative property of multiplication',
+        },
+        {
+          option: 'Distributive property',
+        },
+        {
+          option: 'Identity property of multiplication',
+        },
+      ],
+      date: '01-05-2024',
+      __v: 0,
+    },
+  ]);
   const GetService = async () => {
     const getResult = await AsyncStorage.getItem('firstYear');
     console.log(getResult, 'async');
@@ -155,16 +329,21 @@ const FirstYear = ({navigation}) => {
                   const subject = filterClass?.filter(
                     e => e?.class == item?.option,
                   );
+                  const chapters = item?.chapter;
                   return (
                     <View key={index}>
                       <TouchableOpacity
                         onPress={() => {
-                          subject?.length > 0
-                            ? navigation.navigate('chapter', {subject})
-                            : ToastAndroid.show(
-                                `No ${item.option} MSQs found`,
-                                ToastAndroid.SHORT,
-                              );
+                          // subject?.length > 0
+                          // ?
+                          navigation.navigate('chapter', {
+                            subject,
+                            chapters,
+                          });
+                          // : ToastAndroid.show(
+                          //     `No ${item.option} MSQs found`,
+                          //     ToastAndroid.SHORT,
+                          //   );
                         }}
                         style={[styles.butn, {}]}>
                         <AniImage
