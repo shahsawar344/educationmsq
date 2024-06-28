@@ -14,31 +14,32 @@ export const CustomButton = ({
   IconName,
   disabled,
   color,
+  colorText,
   IconNameLock,
 }) => (
-    <TouchableOpacity
-      disabled={disabled}
-      onPress={onPress}
-      style={[
-        {
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: bgColor ? bgColor : 'gray',
-          paddingVertical: responsiveHeight(1),
-          borderRadius: responsiveWidth(2),
-          marginVertical: 4,
-        },
-        style,
-      ]}>
-      <Text style={[{color: 'white'}, styleText]}>{text}</Text>
-      {IconNameLock && (
-        <Icon
-          style={{marginLeft: responsiveWidth(3)}}
-          name={IconName ? IconName : 'lock-closed'}
-          size={23}
-          color={color ? color : 'yellow'}
-        />
-      )}
-    </TouchableOpacity>
+  <TouchableOpacity
+    disabled={disabled}
+    onPress={onPress}
+    style={[
+      {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: bgColor ? bgColor : 'gray',
+        paddingVertical: responsiveHeight(1),
+        borderRadius: responsiveWidth(2),
+        marginVertical: 4,
+      },
+      style,
+    ]}>
+    <Text style={[{color: colorText ? colorText : 'white'}, styleText]}>{text}</Text>
+    {IconNameLock && (
+      <Icon
+        style={{marginLeft: responsiveWidth(3)}}
+        name={IconName ? IconName : 'lock-closed'}
+        size={23}
+        color={color ? color : 'yellow'}
+      />
+    )}
+  </TouchableOpacity>
 );

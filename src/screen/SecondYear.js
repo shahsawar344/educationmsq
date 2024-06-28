@@ -25,6 +25,7 @@ import {getAllSecondYear} from '../utils/services';
 import Loader from '../component/Loader';
 import {Ionicon} from '../component/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { secondYear } from '../utils/questions';
 
 const SecondYear = ({navigation}) => {
   const AniImage = Animated.createAnimatedComponent(Image);
@@ -36,7 +37,7 @@ const SecondYear = ({navigation}) => {
       chapter: [
         {name: 'Electrostatics'},
         {name: 'Electromagnetism'},
-        {name: 'AC circuit'},
+        {name: 'AC Circuits'},
         {name: 'Electronics'},
         {name: 'Atomic Spectra'},
       ],
@@ -46,12 +47,12 @@ const SecondYear = ({navigation}) => {
       navigate: 'course',
       path: require('../../assets/quizapp/chemistry.webp'),
       chapter: [
-        {name: 's And p- Block Elements'},
-        {name: 'd and f - Block Elements'},
+        {name: 's and p-Block Elements'},
+        {name: 'd and f-Block Elements'},
         {name: 'Organic Compounds'},
         {name: 'Hydrocarbons'},
         {name: 'Alkyl Halides'},
-        {name: 'Alcohols, Phenols and Ethers'},
+        {name: 'Alcohols, Phenols, and Ethers'},
         {name: 'Carbonyl Compounds I: Aldehydes and Keto'},
         {name: 'Carbonyl Compounds 2: Carboxylic Acids a'},
         {name: 'Biochemistry'},
@@ -66,7 +67,7 @@ const SecondYear = ({navigation}) => {
       path: require('../../assets/quizapp/biology.webp'),
       chapter: [
         {name: 'Respiration'},
-        {name: 'Support And Movement'},
+        {name: 'Support and Movement'},
         {name: 'Biotechnology'},
         {name: 'Evolution'},
         {name: 'Inheritance'},
@@ -80,14 +81,14 @@ const SecondYear = ({navigation}) => {
       path: require('../../assets/quizapp/computer.webp'),
       chapter: [
         {name: 'Operating system'},
-        {name: 'System development life cycle'},
+        {name: 'System Development Life Cycle'},
         {name: 'Object oriented programming using C++'},
-        {name: 'Control structure'},
-        {name: 'Array and strings'},
+        {name: 'Control Structure'},
+        {name: 'Arrays and Strings'},
         {name: 'Functions'},
         {name: 'Pointers'},
-        {name: 'Objects and classes'},
-        {name: 'File handling'},
+        {name: 'Objects and Classes'},
+        {name: 'File Handling'},
       ],
     },
     {
@@ -125,7 +126,7 @@ const SecondYear = ({navigation}) => {
   ];
   const [dataOption, setDataOption] = useState('');
   const [loading, setLoading] = useState(false);
-  const [filterClass, setFilterClass] = useState([]);
+  const [filterClass, setFilterClass] = useState(secondYear);
   const GetService = async () => {
     const getResult = await AsyncStorage.getItem('secondYear');
     console.log(getResult, 'async');
@@ -137,7 +138,7 @@ const SecondYear = ({navigation}) => {
     setLoading(true);
     try {
       const result = await getAllSecondYear();
-      // console.log(result, 'second year');
+      console.log(result, 'second year');
       if (result.status == true) {
         setLoading(false);
         setFilterClass(result.result);
@@ -154,6 +155,9 @@ const SecondYear = ({navigation}) => {
   };
   useEffect(() => {
     getQuestion();
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   }, []);
   return (
     <View style={{backgroundColor: '#383b38', flex: 1}}>

@@ -33,18 +33,19 @@ const Result = ({route, navigation}) => {
       console.log(error);
     }
   };
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     const backOption = () => {
-  //       // navigation.navigate('Home');
-  //     };
-  //     const BackHandle = BackHandler.addEventListener(
-  //       'hardwareBackPress',
-  //       backOption,
-  //     );
-  //     return () => BackHandler.removeEventListener();
-  //   }, []),
-  // );
+  useFocusEffect(
+    useCallback(() => {
+      const backOption = () => {
+        navigation.navigate('Home');
+        return true
+      };
+      const BackHandle = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backOption,
+      );
+      return () => BackHandle.removeEventListener();
+    }, []),
+  );
   const questionData = item ? item : QuestionData;
   return (
     <View style={GlobalStyle.mainContainer}>

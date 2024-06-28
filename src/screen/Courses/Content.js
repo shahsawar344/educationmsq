@@ -5,45 +5,31 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {GlobalStyle} from '../../component/GlobalStyle';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import CustomModel from '../../component/CustomModel';
 import {Ionicon} from '../../component/Icons';
 import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import {chapterID} from '../../utils/AdsUnits';
 
-const Chapter = ({navigation, route}) => {
-  const {subject, chapters} = route?.params ? route?.params : '';
-  const [dataChapter, setDataChapter] = useState(
-    chapters
-      ? chapters
-      : [{name: 'Chapter 1'}, {name: 'Chapter 2'}, {name: 'Chapter 3'}],
-  );
-  // const dataChapter = [
-  //   {item: 'Chapter 1'},
-  //   {item: 'Chapter 2'},
-  //   {item: 'Chapter 3'},
-  //   {item: 'Chapter 4'},
-  //   {item: 'Chapter 5'},
-  //   {item: 'Chapter 6'},
-  //   {item: 'Chapter 7'},
-  //   {item: 'Chapter 8'},
-  //   {item: 'Chapter 9'},
-  //   {item: 'Chapter 10'},
-  //   {item: 'Chapter 11'},
-  //   {item: 'Chapter 12'},
-  // ];
-
-  const [openModel, setOpenModel] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setOpenModel(false);
-    }, 1500);
-  }, [openModel]);
+const Content = ({navigation, route}) => {
+  const [dataChapter, setDataChapter] = useState([
+    {name: 'Stoichiometry'},
+    {name: 'Atomic Structure'},
+    {name: 'Theories of Covalent Bonding and Shapes'},
+    {name: 'States of Matter I: Gases'},
+    {name: 'State of Matter II: Liquids'},
+    {name: 'State of Matter III: Solids'},
+    {name: 'Chemical Equilibrium'},
+    {name: 'Acids, Bases and Salts'},
+    {name: 'Chemical Kinetics'},
+    {name: 'Solutions and Colloids'},
+    {name: 'Thermochemistry'},
+    {name: 'Electrochemistry'},
+  ]);
   return (
     <View style={GlobalStyle.mainContainer}>
       <View
@@ -70,13 +56,14 @@ const Chapter = ({navigation, route}) => {
           Chapter List
         </Text>
       </View>
-      <View style={{alignItems: 'center'}}>
-        <BannerAd unitId={chapterID} size={BannerAdSize.BANNER} />
-      </View>
+
       <View style={{paddingHorizontal: responsiveWidth(5), flex: 1}}>
+        <View style={{alignItems: 'center', marginTop: responsiveHeight(2)}}>
+          <BannerAd unitId={chapterID} size={BannerAdSize.BANNER} />
+        </View>
+        {/* <View style={{paddingHorizontal: responsiveWidth(5), flex: 1}}> */}
         <ScrollView showsVerticalScrollIndicator={false}>
           {dataChapter.map((dataItem, i) => {
-            const item = subject?.filter(e => e?.chapter == dataItem.name);
             return (
               <View
                 key={i}
@@ -86,28 +73,22 @@ const Chapter = ({navigation, route}) => {
                   borderRadius: responsiveWidth(2),
                 }}>
                 <TouchableOpacity
-                  onPress={() => {
-                    item?.length > 0
-                      ? navigation.navigate('msq', {item})
-                      : setOpenModel(!openModel);
-                  }}
+                  onPress={() => {}}
                   style={{
                     borderRadius: responsiveWidth(1),
                     alignItems: 'center',
                     paddingVertical: responsiveHeight(1),
                   }}>
                   <Text style={{color: 'black'}}>{dataItem.name}</Text>
-                  {item?.length < 1 && (
-                    <Text
-                      style={{
-                        position: 'absolute',
-                        right: 10,
-                        top: 10,
-                        fontSize: 8,
-                      }}>
-                      Not available
-                    </Text>
-                  )}
+                  <Text
+                    style={{
+                      position: 'absolute',
+                      right: 10,
+                      top: 10,
+                      fontSize: 8,
+                    }}>
+                    Not available
+                  </Text>
                 </TouchableOpacity>
               </View>
             );
@@ -118,7 +99,8 @@ const Chapter = ({navigation, route}) => {
               backgroundColor: 'red',
               borderRadius: responsiveWidth(10),
             }}>
-            <View
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
               style={{
                 alignItems: 'center',
                 paddingVertical: responsiveHeight(1.8),
@@ -126,22 +108,15 @@ const Chapter = ({navigation, route}) => {
               <Text style={{color: 'white', fontWeight: 'bold'}}>
                 End of Chapters
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </ScrollView>
+        {/* </View> */}
       </View>
-      <CustomModel model={openModel} closeModel={setOpenModel}>
-        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 17}}>
-          Sorry !{' '}
-        </Text>
-        <Text style={{color: 'black', fontSize: 12}}>
-          Not available this moment
-        </Text>
-      </CustomModel>
     </View>
   );
 };
 
-export default Chapter;
+export default Content;
 
 const styles = StyleSheet.create({});

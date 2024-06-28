@@ -1,4 +1,5 @@
 import {
+  BackHandler,
   Modal,
   StyleSheet,
   Text,
@@ -25,6 +26,7 @@ import {
 } from 'react-native-google-mobile-ads';
 import {interstitialUnit} from '../../utils/AdsUnits';
 import {useFocusEffect} from '@react-navigation/native';
+import CustomModel from '../../component/CustomModel';
 
 const MSQ = ({navigation, route}) => {
   const item = route?.params.item ? route?.params.item : '';
@@ -46,7 +48,6 @@ const MSQ = ({navigation, route}) => {
   //   keywords: ['fashion', 'clothing'],
   // });
   const [model, setModel] = useState(false);
-
 
   const [timeString, setTimeString] = useState('00');
   function startCountdown(minutes, seconds) {
@@ -103,6 +104,25 @@ const MSQ = ({navigation, route}) => {
   //   startCountdown(0, 30);
   // }, [getNumber]);
 
+  const [modelShow, setModelShow] = useState(false);
+  useFocusEffect(
+    useCallback(() => {
+      const backAction = () => {
+        console.log('hello sir');
+        setModelShow(true);
+        setModel(!model);
+        return true;
+      };
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction,
+      );
+      return () => backHandler.remove();
+    }, []),
+  );
+  useEffect(() => {
+    getData?.length == 10 ? setModelShow(!modelShow) : null;
+  }, [getData]);
   return (
     <View style={QuizStyle.FullView}>
       <View style={QuizStyle.QuestionView}>
@@ -136,7 +156,7 @@ const MSQ = ({navigation, route}) => {
                 }}
                 key={indexAnswer}
                 style={{}}>
-                <View style={QuizStyle.SingleMCQsView}>
+                <View style={[QuizStyle.SingleMCQsView, {flexWrap: 'nowrap'}]}>
                   <View
                     style={[
                       QuizStyle.Optionborder,
@@ -155,12 +175,13 @@ const MSQ = ({navigation, route}) => {
                     </Text>
                   </View>
 
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <View style={{}}>
                     <Text
                       style={[
                         QuizStyle.MCQsText,
                         {
-                          marginLeft: 5,
+                          // marginLeft: 5,
+                          fontSize: responsiveWidth(4),
                         },
                       ]}>
                       {itemAnswer.option}
@@ -189,6 +210,9 @@ const MSQ = ({navigation, route}) => {
               //  interstitial.show()
               setCheckData('');
             }}
+            // onPress={() => {
+            //   setModelShow(true);
+            // }}
             style={{width: responsiveWidth(80)}}
             IconName={'chevron-forward'}
             color={'white'}
@@ -202,55 +226,109 @@ const MSQ = ({navigation, route}) => {
           )} */}
         </View>
       </View>
+
       <Modal
-        onRequestClose={() => setModel(false)}
-        visible={model}
+        onRequestClose={() => setModelShow(false)}
+        visible={modelShow}
         animationType="fade"
         transparent={true}>
-        <TouchableWithoutFeedback
-          onPress={() => setModel(false)}
-          style={{flex: 1}}>
-          <View
-            style={{
-              backgroundColor: '#00000090',
-              flex: 1,
-            }}>
-            <View style={[GlobalStyle.flexCenter, {}]}>
-              <View
-                style={{
-                  backgroundColor: 'white',
-                  borderRadius: 8,
-                  // paddingVertical: responsiveHeight(2),
-                  height: responsiveWidth(40),
-                  width: responsiveWidth(60),
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
+        {/* <TouchableWithoutFeedback
+          onPress={() => setModelShow(false)}
+          style={{flex: 1}}> */}
+        <View
+          style={{
+            backgroundColor: '#00000090',
+            flex: 1,
+          }}>
+          <View style={[GlobalStyle.flexCenter, {}]}>
+            <View
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 8,
+                // paddingVertical: responsiveHeight(2),
+                height:model?responsiveHeight(16): responsiveHeight(24),
+                width: responsiveWidth(79),
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              {model ? (
                 <View>
-                  <Text>Do you want to exit from this section</Text>
+                  <Text style={{color: 'black', fontSize: 16}}>
+                    Do you want to exit?
+                  </Text>
                   <View style={GlobalStyle.flexJustify}>
                     <CustomButton
-                      text={'Cancel'}
-                      style={{width: responsiveWidth(30)}}
-                      bgColor={'red'}
-                      onPress={() => setModel(false)}
+                      text={'No'}
+                      style={{
+                        width: responsiveWidth(30),
+                      }}
+                      bgColor={'#a2d2ff'}
+                      onPress={() => {
+                        setModelShow(!modelShow)
+                        setModel(!model);
+                      }}
                     />
-                    <View
-                      style={{backgroundColor: 'white', marginHorizontal: 3}}
-                    />
+                    <View style={{backgroundColor:'white',width:20}} />
                     <CustomButton
                       text={'Yes'}
-                      onPress={() => {
-                        navigation.goBack(), setModel(false);
+                      style={{
+                        width: responsiveWidth(30),
                       }}
-                      style={{width: responsiveWidth(19)}}
+                      bgColor={'red'}
+                      onPress={() => {
+                        navigation.goBack();
+                        setGetData([]);
+                      }}
                     />
                   </View>
                 </View>
-              </View>
+              ) : (
+                <View>
+                  <Text style={{color: 'black', fontSize: 16}}>
+                    Do you want to see your result?
+                  </Text>
+                  <View style={{alignItems: 'flex-end'}}>
+                    <CustomButton
+                      text={'Yes'}
+                      style={{
+                        width: responsiveWidth(30),
+                      }}
+                      bgColor={'#a2d2ff'}
+                      onPress={() => {
+                        navigation.navigate('result', {
+                          getData,
+                          getResult,
+                          item,
+                        });
+                      }}
+                    />
+                    {/* <View
+                      style={{backgroundColor: 'white', marginHorizontal: 3}}
+                      /> */}
+                    <Text
+                      style={{
+                        color: 'black',
+                        fontSize: 16,
+                        alignSelf: 'center',
+                      }}>
+                      --Or continue--{' '}
+                    </Text>
+                    <CustomButton
+                      text={'Continue'}
+                      bgColor={'#d9dcd6'}
+                      colorText={'black'}
+                      onPress={() => {
+                        setModelShow(false);
+                      }}
+                      style={{width: responsiveWidth(30)}}
+                    />
+                  </View>
+                </View>
+              )}
             </View>
           </View>
-        </TouchableWithoutFeedback>
+        </View>
+        {/* </TouchableWithoutFeedback> */}
       </Modal>
     </View>
   );

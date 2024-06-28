@@ -215,20 +215,25 @@
 // });
 // export default VoicenoteAnimation;
 
-
-
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import Animated, {
+  BounceIn,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { MatricId } from '../utils/AdsUnits';
-import { GlobalStyle } from '../component/GlobalStyle';
+import {MatricId} from '../utils/AdsUnits';
+import {GlobalStyle} from '../component/GlobalStyle';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {Ionicon} from '../component/Icons';
 
-const Practise = () => {
+const Practise = ({navigation, route}) => {
   const [bg, setBg] = useState('white');
   const rotate = useSharedValue(0);
   const height = useSharedValue(50);
@@ -352,6 +357,33 @@ const Practise = () => {
       ],
     };
   }, []);
+  const dataThings = [
+    {
+      option: '9th Science',
+      navigate: 'nineScience',
+      path: require('../../assets/science.png'),
+    },
+    {
+      option: '9th Arts',
+      navigate: 'nineArts',
+      path: require('../../assets/arts.png'),
+    },
+    {
+      option: '10th Science',
+      navigate: 'tenthScience',
+      path: require('../../assets/science.png'),
+    },
+    {
+      option: '10th Arts',
+      navigate: 'tenthArts',
+      path: require('../../assets/arts.png'),
+    },
+  ];
+  const [dataOption, setDataOption] = useState('');
+  // const question = useSelector(e => e?.QuestionData);
+  // console.log(question, 'new thing');
+
+  const AniImage = Animated.createAnimatedComponent(Image);
   const animatedStyles7 = useAnimatedStyle(() => {
     return {
       height: height.value,
@@ -470,16 +502,77 @@ const Practise = () => {
     //       <Animated.View style={[animatedStyles7, styles.palette('#F1D9D9')]} />
     //     </TouchableOpacity>
     //   </View>
-    //   {/* <View style={{alignItems:'center'}}>
-    //       <BannerAd
-    //         unitId={MatricId}
-    //         size={BannerAdSize.BANNER}
-    //       />
-    //     </View> */}
+    //
     // </View>
 
-    <View style={GlobalStyle.flexCenter}>
-      <Text>Data will uploaded soon.....</Text>
+    <View style={{backgroundColor: '#fff', flex: 1}}>
+      <View
+        style={[
+          {
+            paddingVertical: responsiveHeight(2.5),
+            backgroundColor: '#00000040',
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+            paddingHorizontal: responsiveWidth(7),
+          },
+          GlobalStyle.flexData,
+        ]}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicon name={'chevron-back'} size={25} color={'white'} />
+        </TouchableOpacity>
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 17,
+            fontWeight: '700',
+            marginLeft: responsiveWidth(21),
+          }}>
+          Matric MCQs
+        </Text>
+      </View>
+      <View
+        style={{
+          paddingHorizontal: responsiveWidth(5),
+          flex: 1,
+          backgroundColor: 'white',
+        }}>
+        <View style={{flex: 0.2}}></View>
+        <View style={[{flex: 0.3}]}></View>
+        <View style={{flex: 1}}>
+          <BannerAd unitId={MatricId} size={BannerAdSize.BANNER} />
+        </View>
+        <Text
+          style={{
+            color: 'black',
+            fontSize: 17,
+            fontWeight: '500',
+            textAlign: 'center',
+            flex: 0.7,
+          }}>
+          Choose the section you want to practice with
+        </Text>
+
+        <View style={{flex: 4}}>
+          <View style={[GlobalStyle.flexJustify, {flexWrap: 'wrap'}]}>
+            {dataThings?.map((item, index) => (
+              <View key={index}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(item.navigate)}
+                  style={[styles.butn, GlobalStyle.shadow, {}]}>
+                  <Image
+                    source={item.path}
+                    entering={BounceIn.delay(100 * index).duration(900)}
+                    style={{width: 40, height: 40}}
+                  />
+                  <Text style={{color: 'black', fontSize: 14}}>
+                    {item.option}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -499,6 +592,22 @@ const styles = StyleSheet.create({
       elevation: 2,
       top: 20,
     };
+  },
+  butn: {
+    width: responsiveWidth(42),
+    height: responsiveWidth(37),
+    borderRadius: 8,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });
 

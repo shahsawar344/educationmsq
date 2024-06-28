@@ -45,6 +45,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {checkVersion} from 'react-native-check-version';
 import DeviceInfo from 'react-native-device-info';
 import Chapter from './src/screen/Courses/Chapter';
+import Content from './src/screen/Courses/Content';
+import NineArts from './src/screen/matric/NineArts';
+import NineScience from './src/screen/matric/NineScience';
+import TenthArts from './src/screen/matric/TenthArts';
+import TenthScience from './src/screen/matric/TenthScience';
 
 const App = () => {
   const options = {
@@ -105,7 +110,12 @@ const StackNavigation = () => {
         <Stack.Screen name="first" component={FirstYear} />
         <Stack.Screen name="second" component={SecondYear} />
         <Stack.Screen name="matric" component={Matric} />
+        <Stack.Screen name="content" component={Content} />
         <Stack.Screen name="msq" component={MSQ} />
+        <Stack.Screen name="nineArts" component={NineArts} />
+        <Stack.Screen name="nineScience" component={NineScience} />
+        <Stack.Screen name="tenthArts" component={TenthArts} />
+        <Stack.Screen name="tenthScience" component={TenthScience} />
       </Stack.Navigator>
     </NavigationContainer>
   );
