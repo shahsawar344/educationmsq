@@ -18,135 +18,96 @@ import Icons from 'react-native-vector-icons/Ionicons';
 import {BounceIn, BounceInDown, BounceOutDown} from 'react-native-reanimated';
 import {useSelector} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getAllFirstYear } from '../../utils/services';
-import { firstYearId } from '../../utils/AdsUnits';
-import { BannerAdSize } from 'react-native-google-mobile-ads';
-import { GlobalStyle } from '../../component/GlobalStyle';
-import { nineScienceQuestion } from '../../utils/questions';
+import {getAllFirstYear} from '../../utils/services';
+import {GettingStarted} from '../../utils/AdsUnits';
+import {BannerAdSize} from 'react-native-google-mobile-ads';
+import {GlobalStyle} from '../../component/GlobalStyle';
+import {nineScienceQuestion} from '../../utils/questions';
 import Loader from '../../component/Loader';
-
+import {Ionicon} from '../../component/Icons';
 
 const NineScience = ({navigation}) => {
   const AniImage = Animated.createAnimatedComponent(Image);
   const AniView = Animated.createAnimatedComponent(View);
-  // const dataThings = [
-  //   {
-  //     option: 'Physics',
-  //     navigate: 'course',
-  //     path: require('../../../assets/quizapp/physics.webp'),
-  //     chapter: [
-  //       {name: 'Measurement'},
-  //       {name: 'Vectors & Equilibrium'},
-  //       {name: 'Forces & Motion'},
-  //       {name: 'Work & Energy'},
-  //       {name: 'Rotational & Circular Motion'},
-  //       {name: 'Fluid Dynamics'},
-  //       {name: 'Oscillation'},
-  //       {name: 'Waves'},
-  //       {name: 'Physical Optics Notes'},
-  //       {name: 'Thermodynamics'},
-  //     ],
-  //   },
-  //   {
-  //     option: 'Chemistry',
-  //     navigate: 'course',
-  //     path: require('../../../assets/quizapp/chemistry.webp'),
-  //     chapter: [
-  //       {name: 'Stoichiometry'},
-  //       {name: 'Atomic Structure'},
-  //       {name: 'Theories of Covalent Bonding and Shapes'},
-  //       {name: 'States of Matter I: Gases'},
-  //       {name: 'State of Matter II: Liquids'},
-  //       {name: 'State of Matter III: Solids'},
-  //       {name: 'Chemical Equilibrium'},
-  //       {name: 'Acids, Bases and Salts'},
-  //       {name: 'Chemical Kinetics'},
-  //       {name: 'Solutions and Colloids'},
-  //       {name: 'Thermochemistry'},
-  //       {name: 'Electrochemistry'},
-  //     ],
-  //   },
-  //   {
-  //     option: 'Biology',
-  //     navigate: 'course',
-  //     path: require('../../../assets/quizapp/biology.webp'),
-  //     chapter: [
-  //       {name: 'Cell Structure And Function'},
-  //       {name: 'Biological Molecules'},
-  //       {name: 'Enzymes'},
-  //       {name: 'Bioenergetics'},
-  //       {name: 'Acellular Life'},
-  //       {name: 'Prokaryotes'},
-  //       {name: 'Protista And Fungi'},
-  //       {name: 'Diversity Among Plants'},
-  //       {name: 'Diversity Among Animals'},
-  //       {name: 'Form And Functions In Plants'},
-  //       {name: 'Digestion'},
-  //       {name: 'Circulation'},
-  //       {name: 'Immunity'},
-  //     ],
-  //   },
-  //   {
-  //     option: 'Computer',
-  //     navigate: 'course',
-  //     path: require('../../../assets/quizapp/computer.webp'),
-  //     chapter: [
-  //       {name: 'Overview of computer system'},
-  //       {name: 'Computer memory'},
-  //       {name: 'Centeral processing memory'},
-  //       {name: 'Inside system unit'},
-  //       {name: 'Network communication and protocol'},
-  //       {name: 'Wireless communication'},
-  //       {name: 'Database fundamentals'},
-  //       {name: 'Database development'},
-  //     ],
-  //   },
-  //   {
-  //     option: 'English',
-  //     navigate: 'course',
-  //     path: require('../../../assets/quizapp/english.webp'),
-  //     chapter: [
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //     ],
-  //   },
-  //   // {
-  //   //   option: 'Maths',
-  //   //   navigate: 'course',
-  //   //   path: require('../../../assets/quizapp/maths.webp'),
-  //   //   chapter: [
-  //   //     {name: ''},
-  //   //     {name: ''},
-  //   //     {name: ''},
-  //   //     {name: ''},
-  //   //     {name: ''},
-  //   //     {name: ''},
-  //   //     {name: ''},
-  //   //     {name: ''},
-  //   //   ],
-  //   // },
-  //   {
-  //     option: 'Arts',
-  //     navigate: 'course',
-  //     path: require('../../../assets/quizapp/geography.webp'),
-  //     chapter: [
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //       {name: ''},
-  //     ],
-  //   },
-  // ];
+  const dataThings = [
+    {
+      option: 'Physics',
+      navigate: 'course',
+      path: require('../../../assets/quizapp/physics.webp'),
+      chapter: [
+        {name: 'Physical Quantities and Measurment'},
+        {name: 'Kinematics'},
+        {name: 'Dynamics'},
+        {name: 'Turning Effect of Forces'},
+        {name: 'Gravitation'},
+        {name: 'Work and Energy'},
+        {name: 'Properties of Matter'},
+        {name: 'Thermal Properties of Matter'},
+        {name: 'Transfer of Heat'},
+      ],
+    },
+    {
+      option: 'Chemistry',
+      navigate: 'course',
+      path: require('../../../assets/quizapp/chemistry.webp'),
+      chapter: [
+        {name: 'Fundamentals of Chemistry'},
+        {name: 'Structure of Atom'},
+        {name: 'Periodic Table and Periodicity of Proper'},
+        {name: 'Structure of Molecules'},
+        {name: 'Physical States of Matter'},
+        {name: 'Solutions'},
+        {name: 'Electrochemistry'},
+        {name: 'Chemical Reactivity'},
+      ],
+    },
+    {
+      option: 'Biology',
+      navigate: 'course',
+      path: require('../../../assets/quizapp/biology.webp'),
+      chapter: [
+        {name: 'Introduction to Biology'},
+        {name: 'Solving a Biological Problem'},
+        {name: 'Biodiversity'},
+        {name: 'Cells and Tissues'},
+        {name: 'Cell Cycle'},
+        {name: 'Enzymes'},
+        {name: 'Bio-energetics'},
+        {name: 'Nutrition'},
+        {name: 'Transport'},
+      ],
+    },
+    {
+      option: 'Computer',
+      navigate: 'course',
+      path: require('../../../assets/quizapp/computer.webp'),
+      chapter: [
+        {name: 'Fundamentals of Computer'},
+        {name: 'Fundamentals of Operating System'},
+        {name: 'Office Automation'},
+        {name: 'Data Communication'},
+        {name: 'Computer Networks'},
+        {name: 'Computer Security and Ethics'},
+      ],
+    },
+    {
+      option: 'Math',
+      navigate: 'course',
+      path: require('../../../assets/quizapp/english.webp'),
+      chapter: [
+        {name: 'Percentage, Ratio and Proportion'},
+        {name: 'Zakat, Ushr and Inheritance'},
+        {name: 'Business Mathematics'},
+        {name: 'Financial Mathematics'},
+        {name: 'Consumer Mathematics'},
+        {name: 'Exponents and Logarithms'},
+        {name: 'Arithmetic and Geometric Sequences'},
+        {name: 'Sets and Functions'},
+        {name: 'Linear Graphs'},
+        {name: 'Basic Statistics'},
+      ],
+    },
+  ];
   const [dataOption, setDataOption] = useState('');
   // const filterClass = question?.filter(e => e?.type == 'First Year');
   // console.log(filterClass[0]);
@@ -163,7 +124,7 @@ const NineScience = ({navigation}) => {
     setLoading(true);
     try {
       const result = await getAllFirstYear();
-      console.log(result, 'first year');
+      // console.log(result, 'first year');
       if (result.status == true) {
         setLoading(false);
         setFilterClass(result.result);
@@ -217,7 +178,7 @@ const NineScience = ({navigation}) => {
           }}>
           (Nine Science)
         </Text>
-        
+
         {loading ? (
           <View style={{flex: 7}}>
             <Loader />
@@ -230,7 +191,7 @@ const NineScience = ({navigation}) => {
                   GlobalStyle.flexJustify,
                   {flexWrap: 'wrap', justifyContent: 'center'},
                 ]}>
-                {Array.from({length:5})?.map((item, index) => {
+                {dataThings.map((item, index) => {
                   const subject = filterClass?.filter(
                     e =>
                       e?.class ==
@@ -249,14 +210,14 @@ const NineScience = ({navigation}) => {
                                 chapters,
                               })
                             : ToastAndroid.show(
-                                `No $Generated code MSQs found`,
+                                `No ${item.option} MSQs found`,
                                 ToastAndroid.SHORT,
                               );
                         }}
                         style={[styles.butn, {}]}>
                         <AniImage
                           resizeMode={'contain'}
-                          source={require('../../../assets/bio4.jpg')}
+                          source={item?.path}
                           style={{width: 75, height: 75}}
                           entering={BounceInDown.delay(100 * index).duration(
                             900,
@@ -273,7 +234,7 @@ const NineScience = ({navigation}) => {
                           </View>
                         )}
                         <Text style={{color: 'white', fontSize: 11}}>
-                          Generated code
+                          {item?.option}
                         </Text>
                       </TouchableOpacity>
                     </View>

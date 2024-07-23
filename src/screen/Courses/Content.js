@@ -13,7 +13,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {Ionicon} from '../../component/Icons';
 import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
-import {chapterID} from '../../utils/AdsUnits';
+import {GettingStarted} from '../../utils/AdsUnits';
 
 const Content = ({navigation, route}) => {
   const [dataChapter, setDataChapter] = useState([
@@ -59,7 +59,7 @@ const Content = ({navigation, route}) => {
 
       <View style={{paddingHorizontal: responsiveWidth(5), flex: 1}}>
         <View style={{alignItems: 'center', marginTop: responsiveHeight(2)}}>
-          <BannerAd unitId={chapterID} size={BannerAdSize.BANNER} />
+          <BannerAd unitId={GettingStarted} size={BannerAdSize.BANNER} />
         </View>
         {/* <View style={{paddingHorizontal: responsiveWidth(5), flex: 1}}> */}
         <ScrollView showsVerticalScrollIndicator={false}>

@@ -232,17 +232,6 @@ const firstYear = [
     __v: 0,
   },
   {
-    _id: '6676b118f11e762e9a863521',
-    question:
-      'In the reaction 4Fe + 3O₂ → 2Fe₂O₃, how many moles of Fe₂O₃ are produced from 6 moles of Fe?',
-    correctAnswer: '3 moles',
-    class: 'Chemistry',
-    chapter: 'Stoichiometry',
-    fieldsData: [],
-    date: '2024-06-20',
-    __v: 0,
-  },
-  {
     _id: '6676b10cf11e762e9a86351e',
     question: 'What is percent yield?',
     correctAnswer:

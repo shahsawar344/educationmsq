@@ -19,7 +19,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
 import {GlobalStyle} from '../component/GlobalStyle';
 import {BounceIn, BounceInDown, BounceOutDown} from 'react-native-reanimated';
 import {useSelector} from 'react-redux';
-import {SecondYearId} from '../utils/AdsUnits';
+import {GettingStarted} from '../utils/AdsUnits';
 import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import {getAllSecondYear} from '../utils/services';
 import Loader from '../component/Loader';
@@ -196,7 +196,7 @@ const SecondYear = ({navigation}) => {
           (Second Year)
         </Text>
         <View style={{alignItems: 'center'}}>
-          <BannerAd unitId={SecondYearId} size={BannerAdSize.BANNER} />
+          <BannerAd unitId={GettingStarted} size={BannerAdSize.BANNER} />
         </View>
         {loading ? (
           <View style={{flex: 7}}>

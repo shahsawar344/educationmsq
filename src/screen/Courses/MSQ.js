@@ -24,7 +24,7 @@ import {
   AdEventType,
   TestIds,
 } from 'react-native-google-mobile-ads';
-import {interstitialUnit} from '../../utils/AdsUnits';
+import {interstitialUnit, Rewarded} from '../../utils/AdsUnits';
 import {useFocusEffect} from '@react-navigation/native';
 import CustomModel from '../../component/CustomModel';
 
@@ -41,12 +41,11 @@ const MSQ = ({navigation, route}) => {
     String.fromCharCode('a'.charCodeAt(0) + index),
   );
 
-  // const adUnitId = interstitialUnit;
-  // // const adUnitId = TestIds.INTERSTITIAL;
+  const adUnitId = Rewarded;
 
-  // const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-  //   keywords: ['fashion', 'clothing'],
-  // });
+  const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+    keywords: ['fashion', 'clothing'],
+  });
   const [model, setModel] = useState(false);
 
   const [timeString, setTimeString] = useState('00');
@@ -71,25 +70,30 @@ const MSQ = ({navigation, route}) => {
     }, 1000);
     setIntervalId(interval);
   }
+
   const [loaded, setLoaded] = useState(false);
   const questionData = item ? item : QuestionData;
 
-  // useEffect(() => {
-  //   const unsubscribe = interstitial.addAdEventListener(
-  //     AdEventType.LOADED,
-  //     () => {
-  //       console.log('showed');
-  //       interstitial.show();
-  //     },
-  //   );
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        console.log('showed');
 
-  //   // Start loading the interstitial straight away
-  //   interstitial.load();
+        interstitial.show();
+      },
+    );
 
-  //   // Unsubscribe from events on unmount
-  //   return unsubscribe;
-  // }, [questionData?.length - 3 == getNumber]);
+    // Start loading the interstitial straight away
+    interstitial.load();
 
+    // Unsubscribe from events on unmount
+    return unsubscribe;
+  }, [getData?.length > 7]);
+
+  // if (!loaded) {
+  //   return null;
+  // }
   // No advert ready to show yet
   // if (!loaded) {
   //   return null;
@@ -121,7 +125,15 @@ const MSQ = ({navigation, route}) => {
     }, []),
   );
   useEffect(() => {
-    getData?.length == 10 ? setModelShow(!modelShow) : null;
+    getData?.length == 10
+      ? setModelShow(!modelShow)
+      : getData?.length == 20
+      ? setModelShow(!modelShow)
+      : getData?.length == 30
+      ? setModelShow(!modelShow)
+      : getData?.length == 40
+      ? setModelShow(!modelShow)
+      : null;
   }, [getData]);
   return (
     <View style={QuizStyle.FullView}>
@@ -140,14 +152,15 @@ const MSQ = ({navigation, route}) => {
 
         <View style={QuizStyle.Question}>
           <Text style={QuizStyle.QuestionText}>
-            Question: {questionData[getNumber]?.question}
+            <Text style={{fontWeight: 'bold'}}>Question:</Text>{' '}
+            {questionData[getNumber]?.question}
           </Text>
         </View>
       </View>
 
       <View style={QuizStyle.MCQsView}>
         <View style={{marginTop: responsiveHeight(1)}}>
-          {questionData[getNumber]?.fieldsData?.map(
+          {questionData[getNumber].fieldsData?.map(
             (itemAnswer, indexAnswer) => (
               <TouchableOpacity
                 activeOpacity={0.5}
@@ -246,33 +259,36 @@ const MSQ = ({navigation, route}) => {
                 backgroundColor: 'white',
                 borderRadius: 8,
                 // paddingVertical: responsiveHeight(2),
-                height:model?responsiveHeight(16): responsiveHeight(24),
-                width: responsiveWidth(79),
+                height: model ? responsiveHeight(17) : responsiveHeight(24),
+                width: model ? responsiveWidth(60) : responsiveWidth(79),
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
               {model ? (
                 <View>
                   <Text style={{color: 'black', fontSize: 16}}>
-                    Do you want to exit?
+                    Do you want to leave the quiz?
                   </Text>
-                  <View style={GlobalStyle.flexJustify}>
+                  <View style={{}}>
                     <CustomButton
                       text={'No'}
+                      colorText={'black'}
                       style={{
                         width: responsiveWidth(30),
+                        alignSelf: 'flex-start',
                       }}
                       bgColor={'#a2d2ff'}
                       onPress={() => {
-                        setModelShow(!modelShow)
+                        setModelShow(!modelShow);
                         setModel(!model);
                       }}
                     />
-                    <View style={{backgroundColor:'white',width:20}} />
+                    {/* <View style={{backgroundColor: 'white', width: 20}} /> */}
                     <CustomButton
-                      text={'Yes'}
+                      text={'Confirm'}
                       style={{
                         width: responsiveWidth(30),
+                        alignSelf: 'flex-end',
                       }}
                       bgColor={'red'}
                       onPress={() => {
@@ -290,6 +306,7 @@ const MSQ = ({navigation, route}) => {
                   <View style={{alignItems: 'flex-end'}}>
                     <CustomButton
                       text={'Yes'}
+                      colorText={'black'}
                       style={{
                         width: responsiveWidth(30),
                       }}

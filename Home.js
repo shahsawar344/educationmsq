@@ -9,7 +9,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {useSelector} from 'react-redux';
 import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
-import { BannerId, ResultId, StartUp } from './src/utils/AdsUnits';
+import {BannerId, GettingStarted} from './src/utils/AdsUnits';
 
 const Home = ({navigation}) => {
   const dataThings = [
@@ -147,10 +147,7 @@ const Home = ({navigation}) => {
           </View>
         </View>
         <View>
-          <BannerAd
-            unitId={StartUp}
-            size={BannerAdSize.BANNER}
-          />
+          <BannerAd unitId={GettingStarted} size={BannerAdSize.BANNER} />
         </View>
       </View>
     </View>

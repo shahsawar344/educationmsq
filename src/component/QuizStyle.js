@@ -14,7 +14,7 @@ export const QuizStyle = StyleSheet.create({
   QuestionView: {
     flex: 1,
     // marginTop:Platform.OS=="ios"? responsiveHeight(3.7):35,
-    backgroundColor: '#ab3cfc',
+    backgroundColor: '#FADBD8',
     borderBottomEndRadius: responsiveHeight(10),
     overflow: 'scroll',
   },
@@ -24,7 +24,7 @@ export const QuizStyle = StyleSheet.create({
     right: responsiveWidth(3),
   },
   CountText: {
-    color: 'white',
+    color: 'black',
     fontSize: responsiveFontSize(3.1),
   },
   Question: {
@@ -34,7 +34,7 @@ export const QuizStyle = StyleSheet.create({
     marginHorizontal: responsiveWidth(5),
   },
   QuestionText: {
-    color: 'white',
+    color: 'black',
     fontSize: responsiveFontSize(3.2),
   },
   MCQsView: {

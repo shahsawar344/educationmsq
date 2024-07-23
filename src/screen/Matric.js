@@ -216,7 +216,14 @@
 // export default VoicenoteAnimation;
 
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import Animated, {
   BounceIn,
@@ -224,7 +231,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {MatricId} from '../utils/AdsUnits';
+import {GettingStarted} from '../utils/AdsUnits';
 import {GlobalStyle} from '../component/GlobalStyle';
 import {
   responsiveFontSize,
@@ -539,7 +546,7 @@ const Practise = ({navigation, route}) => {
         <View style={{flex: 0.2}}></View>
         <View style={[{flex: 0.3}]}></View>
         <View style={{flex: 1}}>
-          <BannerAd unitId={MatricId} size={BannerAdSize.BANNER} />
+          <BannerAd unitId={GettingStarted} size={BannerAdSize.BANNER} />
         </View>
         <Text
           style={{
@@ -557,7 +564,13 @@ const Practise = ({navigation, route}) => {
             {dataThings?.map((item, index) => (
               <View key={index}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate(item.navigate)}
+                  onPress={() => {
+                    item?.option == '9th Arts'
+                      ? Alert.alert('Excuse!', 'coming soon')
+                      : item?.option == '10th Arts'
+                      ? Alert.alert('Excuse!', 'coming soon')
+                      : navigation.navigate(item.navigate);
+                  }}
                   style={[styles.butn, GlobalStyle.shadow, {}]}>
                   <Image
                     source={item.path}

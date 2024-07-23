@@ -19,7 +19,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
 import {GlobalStyle} from '../component/GlobalStyle';
 import {BounceIn, BounceInDown, BounceOutDown} from 'react-native-reanimated';
 import {useSelector} from 'react-redux';
-import {firstYearId} from '../utils/AdsUnits';
+import {GettingStarted,} from '../utils/AdsUnits';
 import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import {getAllFirstYear} from '../utils/services';
 import Loader from '../component/Loader';
@@ -94,7 +94,7 @@ const FirstYear = ({navigation}) => {
       chapter: [
         {name: 'Overview of computer system'},
         {name: 'Computer memory'},
-        {name: 'Centeral processing memory'},
+        {name: 'Central Processing Unit'},
         {name: 'Inside system unit'},
         {name: 'Network communication and protocol'},
         {name: 'Wireless communication'},
@@ -133,7 +133,7 @@ const FirstYear = ({navigation}) => {
     //   ],
     // },
     {
-      option: 'Arts',
+      option: 'Urdu',
       navigate: 'course',
       path: require('../../assets/quizapp/geography.webp'),
       chapter: [
@@ -164,7 +164,7 @@ const FirstYear = ({navigation}) => {
     setLoading(true);
     try {
       const result = await getAllFirstYear();
-      console.log(result, 'first year');
+      // console.log(result, 'first year');
       if (result.status == true) {
         setLoading(false);
         setFilterClass(result.result);
@@ -222,7 +222,7 @@ const FirstYear = ({navigation}) => {
           (First Year)
         </Text>
         <View style={{alignItems: 'center'}}>
-          <BannerAd unitId={firstYearId} size={BannerAdSize.BANNER} />
+          <BannerAd unitId={GettingStarted} size={BannerAdSize.BANNER} />
         </View>
         {loading ? (
           <View style={{flex: 7}}>
@@ -241,7 +241,7 @@ const FirstYear = ({navigation}) => {
                     e =>
                       e?.class ==
                       (item?.option == 'Computer'
-                        ? 'Computer Science'
+                        ? 'Computer'
                         : item?.option),
                   );
                   const chapters = item?.chapter;

@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
@@ -16,8 +17,9 @@ import {QuestionData} from '../../utils/questions';
 import LottieView from 'lottie-react-native';
 import {CustomButton} from '../../component/CustomButton';
 import {useFocusEffect} from '@react-navigation/native';
+import {Ionicon} from '../../component/Icons';
 
-const Result = ({route, navigation}) => {
+const Result = ({navigation, route}) => {
   const {getData, getResult, item} = route.params ? route.params : '';
   // console.log(getResult,'ngfhj');
   const [loading, setLoading] = useState(false);
@@ -33,19 +35,19 @@ const Result = ({route, navigation}) => {
       console.log(error);
     }
   };
-  useFocusEffect(
-    useCallback(() => {
-      const backOption = () => {
-        navigation.navigate('Home');
-        return true
-      };
-      const BackHandle = BackHandler.addEventListener(
-        'hardwareBackPress',
-        backOption,
-      );
-      return () => BackHandle.removeEventListener();
-    }, []),
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     const backOption = () => {
+  //       navigation.navigate('Home');
+  //       // return true
+  //     };
+  //     const BackHandle = BackHandler.addEventListener(
+  //       'hardwareBackPress',
+  //       backOption,
+  //     );
+  //     return () => BackHandle.removeEventListener();
+  //   }, []),
+  // );
   const questionData = item ? item : QuestionData;
   return (
     <View style={GlobalStyle.mainContainer}>
@@ -69,25 +71,32 @@ const Result = ({route, navigation}) => {
           marginTop: responsiveHeight(2),
           flex: 1,
         }}>
-        <Text>Result: {getResult ? getResult : 0} </Text>
+        <View style={GlobalStyle.flexJustify}>
+          <Text>Your Result: {getResult ? getResult : 0} </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('first')}>
+            <Ionicon name={'reload'} size={21} />
+          </TouchableOpacity>
+        </View>
         <View
           style={{height: 0.8, backgroundColor: 'black', marginVertical: 5}}
         />
         <ScrollView showsVerticalScrollIndicator={false} style={{}}>
-          <Text
-            style={{
-              color: 'black',
-              fontSize: 13,
-              marginBottom: responsiveHeight(2),
-              textAlign: 'center',
-            }}>
-            if you want to see the answers with question so click on this{' '}
+          {!useData && (
             <Text
-              onPress={() => generate()}
-              style={{color: 'blue', fontWeight: '900', letterSpacing: 1}}>
-              GENERATE
+              style={{
+                color: 'black',
+                fontSize: 13,
+                marginBottom: responsiveHeight(2),
+                textAlign: 'center',
+              }}>
+              if you want to see the answers with question so click on this{' '}
+              <Text
+                onPress={() => generate()}
+                style={{color: 'blue', fontWeight: '900', letterSpacing: 1}}>
+                GENERATE
+              </Text>
             </Text>
-          </Text>
+          )}
           {loading ? (
             <View style={{alignItems: 'center'}}>
               <LottieView
@@ -101,9 +110,26 @@ const Result = ({route, navigation}) => {
             <View>
               {useData &&
                 questionData?.map((item, index) => (
-                  <View key={index} style={{}}>
-                    <Text style={{color: 'black', fontSize: 12}}>
-                      {index + 1}: {item.question}
+                  <View
+                    key={index}
+                    style={[
+                      GlobalStyle.shadow,
+                      {
+                        paddingVertical: responsiveHeight(1),
+                        backgroundColor: 'white',
+                        paddingHorizontal: 10,
+                        marginHorizontal: responsiveWidth(1),
+                        borderRadius: responsiveWidth(2),
+                        marginVertical: 2,
+                      },
+                    ]}>
+                    <Text
+                      style={{color: 'black', fontSize: 12, fontWeight: '500'}}>
+                      <Text style={{fontWeight: 'bold', fontSize: 13}}>
+                        {' '}
+                        {index + 1}
+                      </Text>
+                      : {item.question}
                     </Text>
                     <View style={GlobalStyle.flexJustify}>
                       <Text style={{color: 'black', fontSize: 12}}>

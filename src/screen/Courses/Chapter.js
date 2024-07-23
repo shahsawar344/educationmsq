@@ -14,7 +14,7 @@ import {
 import CustomModel from '../../component/CustomModel';
 import {Ionicon} from '../../component/Icons';
 import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
-import {chapterID} from '../../utils/AdsUnits';
+import {GettingStarted} from '../../utils/AdsUnits';
 
 const Chapter = ({navigation, route}) => {
   const {subject, chapters} = route?.params ? route?.params : '';
@@ -71,7 +71,7 @@ const Chapter = ({navigation, route}) => {
         </Text>
       </View>
       <View style={{alignItems: 'center'}}>
-        <BannerAd unitId={chapterID} size={BannerAdSize.BANNER} />
+        <BannerAd unitId={GettingStarted} size={BannerAdSize.BANNER} />
       </View>
       <View style={{paddingHorizontal: responsiveWidth(5), flex: 1}}>
         <ScrollView showsVerticalScrollIndicator={false}>
